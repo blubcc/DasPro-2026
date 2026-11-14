@@ -1,30 +1,38 @@
-# Laporan Praktikum - Jobsheet 6: Studi Kasus Pemilihan dengan Git dan GitHub
+# JOBSHEET 4 - PEMILIHAN 1
 
-Nama: Rediswa Janya Sahastana
-NIM: 264107020243
-Kelas: TI - 1D
+**Identitas Mahasiswa:**
+* **Nama:** [Rediswa Janya Sahastana]
+* **NIM:** [264107020243]
+* **Kelas / No. Presensi:** [1D / 25]
 
 ---
 
-## 1. Persiapan Awal & Pengaturan Git
+## 1: TUJUAN PRAKTIKUM
 
-Pada tahap awal ini, dilakukan pengaturan identitas global pada Visual Studio Code agar setiap perubahan (*commit*) tercatat dengan benar atas nama mahasiswa.
+Berikut adalah tujuan pelaksanaan praktikum pada bab ini:
 
+1.	Mahasiswa mampu menyelesaikan studi kasus menggunakan struktur pemilihan dasar dan pemilihan bersarang. 
+2.	Mahasiswa mampu menyimpan dan mengumpulkan pekerjaan menggunakan Git dan GitHub melalui Visual Studio Code. 
+3.	Mahasiswa mampu berkolaborasi dengan teman menggunakan GitHub. 
+
+---
+
+## 2: HASIL PERCOBAAN & ANALISIS
+
+### 2.1 Percobaan 1: Pengaturan Git dan Setup Repository GitHub
+Pada tahap awal ini, dilakukan konfigurasi identitas global Git di lingkungan lokal serta pembuatan repository publik untuk mengelola riwayat pengerjaan tugas praktikum.
+
+#### 2.1.1 Konfigurasi Git Global
 ```bash
-git config --global user.name "blubcc"
+git config --global user.name "rediswajanyas"
 git config --global user.email "rediswajanyas@gmail.com"
+```
 
-2. Percobaan 1: Menyiapkan Repository GitHub
-2.1 Langkah-Langkah Pembuatan Repository
-Membuat repository baru di GitHub dengan nama PraktikumDaspro25 dengan status Public.
+#### 2.2 Percobaan 2: Studi Kasus 1
+Percobaan ini berfokus pada penerapan pemilihan kondisi sederhana untuk menghitung total belanja, potongan diskon, serta validasi ketersediaan uang pembayaran pada kasus kedai kopi.
 
-Melakukan clone repository tersebut ke komputer lokal melalui Visual Studio Code menggunakan URL HTTPS repository.
-
-Membuat file README.md yang berisi identitas diri (Nama, NIM, Kelas) dan melakukan Commit serta Push pertama ke GitHub.
-
-3. Percobaan 2: Studi Kasus 1 (StudiKasus125.java)
-3.1 Kode Program (StudiKasus125.java)
-
+#### 2.2.1 Kode Program Java
+```java
 import java.util.Scanner;
 
 public class StudiKasus125 {
@@ -65,8 +73,9 @@ public class StudiKasus125 {
         sc.close();
     }
 }
-
-3.2 Hasil Output Program
+```
+#### 2.2.2 Hasil Running
+Berikut adalah tampilan output saat program dijalankan:
 
 Masukkan jumlah cup: 3
 Masukkan uang bayar: 50000
@@ -75,9 +84,13 @@ Diskon      : Rp 0
 Total bayar : Rp 54000
 Uang tidak cukup, kurang Rp 4000
 
-4. Percobaan 3: Studi Kasus 2 (StudiKasus225.java)
-4.1 Kode Program (StudiKasus225.java)
-Java
+---
+
+### 2.3 Percobaan 3: Studi Kasus 2
+Percobaan ini menggunakan struktur pemilihan bersarang (nested-if) untuk memvalidasi kelayakan penerimaan dana penghargaan berdasarkan jenis kegiatan, jumlah dokumen, serta peringkat prestasi atau status pendanaan.
+
+#### 2.3.1 Kode Program Java
+```java
 import java.util.Scanner;
 
 public class StudiKasus225 {
@@ -128,62 +141,9 @@ public class StudiKasus225 {
         sc.close();
     }
 }
-
-4. Percobaan 3: Studi Kasus 2 (StudiKasus225.java)
-4.1 Kode Program (StudiKasus225.java)
-
-import java.util.Scanner;
-
-public class StudiKasus225 {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Nama mahasiswa : ");
-        String nama = sc.nextLine();
-        System.out.print("Jenis kegiatan (BELMAWA/BAKORMA/MANDIRI/PKM/LAINNYA): ");
-        String jenis = sc.nextLine().trim().toUpperCase();
-
-        if (jenis.equals("BELMAWA") || jenis.equals("BAKORMA") || jenis.equals("MANDIRI")) {
-            System.out.print("Jumlah dokumen: ");
-            int dokumen = sc.nextInt();
-            System.out.print("Peringkat juara (1/2/3, isi 0 jika bukan juara): ");
-            int juara = sc.nextInt();
-
-            if (juara == 1 || juara == 2 || juara == 3) {
-                if (dokumen == 4) {
-                    System.out.println("Status: Berhak memperoleh dana penghargaan.");
-                } else {
-                    int kurangDoc = 4 - dokumen;
-                    System.out.println("Status: Dokumen tidak lengkap (kurang " + kurangDoc + " dokumen). Dana penghargaan tidak diberikan.");
-                }
-            } else {
-                System.out.println("Status: Tidak memperoleh dana penghargaan (hanya untuk Juara 1/2/3).");
-            }
-        } else if (jenis.equals("PKM")) {
-            System.out.print("Jumlah dokumen: ");
-            int dokumen = sc.nextInt();
-            System.out.print("Status pendanaan PKM (1 = lolos, 0 = tidak lolos): ");
-            int pkmStatus = sc.nextInt();
-
-            if (pkmStatus == 1) {
-                if (dokumen == 4) {
-                    System.out.println("Status: Berhak memperoleh dana penghargaan (PKM lolos pendanaan).");
-                } else {
-                    int kurangDoc = 4 - dokumen;
-                    System.out.println("Status: Dokumen tidak lengkap (kurang " + kurangDoc + " dokumen). Dana penghargaan tidak diberikan.");
-                }
-            } else {
-                System.out.println("Status: Tidak memperoleh dana penghargaan (PKM tidak lolos pendanaan).");
-            }
-        } else {
-            System.out.println("Status: Tidak memperoleh dana penghargaan (jenis kegiatan tidak termasuk ketentuan).");
-        }
-
-        sc.close();
-    }
-}
-
-4.2 Hasil Output Program
+```
+#### 2.3.2 Hasil Running
+Berikut adalah tampilan output saat program dijalankan:
 
 Nama mahasiswa : Dori
 Jenis kegiatan (BELMAWA/BAKORMA/MANDIRI/PKM/LAINNYA): bakorma
@@ -191,10 +151,18 @@ Jumlah dokumen: 3
 Peringkat juara: 1
 Status: Dokumen tidak lengkap (kurang 1 dokumen). Dana penghargaan tidak diberikan.
 
-5. Percobaan 4: Uji Silang Program Teman
-Hasil Uji Studi Kasus 2 oleh Rediswa Janya 25
+---
 
-## Hasil Uji Studi Kasus 2 oleh Rediswa Janya 25
+## 3: TUGAS MANDIRI & UJI SILANG
+Berikut adalah daftar tugas yang dikerjakan pada Jobsheet ini:
+
+- [x] **Tugas 1:** Pembuatan dan implementasi kode program StudiKasus125.java.
+- [x] **Tugas 2:** Pembuatan dan implementasi kode program StudiKasus225.java dengan logika *Nested-IF*.
+- [x] **Tugas 3:** Melakukan uji silang program antar teman menggunakan version control Git & GitHub.
+
+### 3.1 Tabel Pengujian Parameter Output (Uji Silang Studi Kasus 2)
+Berikut adalah hasil pengujian program dengan berbagai kombinasi parameter:
+##### Hasil Uji Studi Kasus 2 milik Saefira Bahari (26) oleh Rediswa Janya (25).
 
 | No | Jenis | Dokumen | Juara/Dana | Output       | Sesuai? |
 | -- | ----- | ------- | ---------- | ------------ | ------- |
@@ -203,5 +171,10 @@ Hasil Uji Studi Kasus 2 oleh Rediswa Janya 25
 | 3  | 3     | 2       | 1          | Berhak       | Ya      |
 | 4  | 0     | 0       | 0          | Tidak Berhak | Ya      |
 
-6. Kesimpulan
-Praktikum Jobsheet 6 ini memberikan pemahaman mendalam mengenai penerapan struktur pemilihan dasar serta pemilihan bersarang (Nested IF) dalam menyelesaikan studi kasus logika pemrograman berbasis Java menggunakan file StudiKasus125.java dan StudiKasus225.java. Selain itu, mahasiswa dapat mempraktikkan langsung alur kerja kolaborasi Git dan GitHub mulai dari proses clone, add, commit, push, pull, hingga uji silang program antar teman dengan baik.
+---
+
+## 4: KESIMPULAN
+Struktur pemilihan majemuk dan bersarang (nested-if) sangat efektif digunakan untuk menangani validasi aturan bisnis yang memiliki banyak tingkatan kondisi dan syarat administratif. Selain itu, integrasi penggunaan Git dan GitHub memudahkan proses pengelolaan versi kode sumber serta kolaborasi pengerjaan tugas secara terstruktur.
+
+
+
