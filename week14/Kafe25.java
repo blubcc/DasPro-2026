@@ -1,7 +1,5 @@
 package week14;
-
 import java.util.Scanner;
-
 public class Kafe25 {
 
     public static void Menu(String namaPelanggan, boolean isMember, int jamKunjung) {
@@ -23,24 +21,69 @@ public class Kafe25 {
         System.out.println("5. Roti Bakar - Rp 10,000");
         System.out.println("6. Mie Goreng - Rp 18,000");
         System.out.println("===========================");
-        System.out.println("Silakan pilih menu yang Anda inginkan.");
+    }
+
+    public static int hitungTotalHarga25(int pilihanMenu, int banyakItem) {
+        int[] hargaItems = {15000, 20000, 22000, 12000, 10000, 18000};
+
+        int hargaTotal = hargaItems[pilihanMenu - 1] * banyakItem;
+        return hargaTotal;
+    }
+
+    public static int hitungDiskon(int total, String kodePromo, boolean isMember) {
+        int persenDiskon = 0;
+
+        if (kodePromo.equals("DISKON50")) {
+            persenDiskon = 50;
+        } else if (kodePromo.equals("DISKON30")) {
+            persenDiskon = 30;
+        } else {
+            System.out.println("Kode promo invalid");
+        }
+
+        if (isMember) {
+            persenDiskon += 10;
+        }
+
+        return total * persenDiskon / 100;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Masukkan nama pelanggan: ");
-        String nama = sc.nextLine();
+        Menu("Andi", true, 15);
 
-        System.out.print("Apakah pelanggan member (y/n): ");
-        char member = sc.next().charAt(0);
+        int totalBayar = 0;
+        boolean isMember = true;
 
-        boolean isMember = member == 'y' || member == 'Y';
+        while (true) {
+            System.out.print("\nMasukkan nomor menu (1-6, 0 untuk selesai): ");
+            int pilihanMenu = sc.nextInt();
 
-        System.out.print("Masukkan jam kunjung: ");
-        int jam = sc.nextInt();
+            if (pilihanMenu == 0) {
+                break;
+            }
 
-        Menu(nama, isMember, jam);
+            if (pilihanMenu < 1 || pilihanMenu > 6) {
+                System.out.println("Menu tidak tersedia");
+                continue;
+            }
+
+            System.out.print("Masukkan jumlah item: ");
+            int banyakItem = sc.nextInt();
+
+            totalBayar += hitungTotalHarga25(pilihanMenu, banyakItem);
+        }
+
+        System.out.print("Masukkan kode promo: ");
+        String kodePromo = sc.next();
+
+        int diskon = hitungDiskon(totalBayar, kodePromo, isMember);
+        int totalAkhir = totalBayar - diskon;
+
+        System.out.println("\nTotal harga: Rp " + totalBayar);
+        System.out.println("Besar diskon: Rp " + diskon);
+        System.out.println("Total yang harus dibayar: Rp " + totalAkhir);
 
         sc.close();
     }
